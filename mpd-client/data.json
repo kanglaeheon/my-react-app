@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "content": "잠 자기",
+      "done": false,
+      "date": "2022. 12. 13",
+      "id": 1
+    },
+    {
+      "content": "밥 먹기",
+      "done": false,
+      "date": "2022. 12. 13",
+      "id": 2
+    },
+    {
+      "content": "코딩하기",
+      "done": false,
+      "date": "2022. 12. 13",
+      "id": 3
+    }
+  ]
+}

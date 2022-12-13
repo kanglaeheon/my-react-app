@@ -42,7 +42,7 @@ export const TodoList = ({ handleCreateBtnClick, isCreateMode }) => {
     <TodoListContainer>
       <TodoListContents>
         {todos.map((todo) => {
-          return <Todo todo={todo} key={todo.id} />;
+          return <Todo todo={todo} key={todo.id} renderTodos={renderTodos} />;
         })}
         <CreateTodo
           handleCreateBtnClick={handleCreateBtnClick}
