@@ -1,9 +1,11 @@
-import { InfoPanel } from "./InfoPanel";
+import { DatePanel } from "./DatePanel";
+import { TodoList } from "./TodoList";
 
 export const Main = () => {
   return (
     <>
-      <InfoPanel></InfoPanel>
+      <DatePanel />
+      <TodoList></TodoList>
     </>
   );
 };
