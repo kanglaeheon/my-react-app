@@ -19,3 +19,5 @@ React와 JSON 서버를 이용한 CRUD 연습용 앱입니다.
 ## json-server api
 
 json-server --watch data.json --port 3001
+
+[screen-recording (2).webm](https://user-images.githubusercontent.com/79088040/207259775-e26c383e-6f69-4aaa-8261-d974cc77532c.webm)
