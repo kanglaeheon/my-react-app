@@ -70,6 +70,12 @@ export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
       });
   };
 
+  const handleOnEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleCreateInputSubmit();
+    }
+  };
+
   return (
     <TodoCreateInputContainer>
       <TodoCreateInputLabel htmlFor="todo_input">Todo</TodoCreateInputLabel>
@@ -82,6 +88,7 @@ export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
         onChange={(e) => {
           handleCreateInputChange(e);
         }}
+        onKeyUp={handleOnEnterKeyPress}
       />
       <TodoCreateInputSubmitBtn onClick={handleCreateInputSubmit}>
         +

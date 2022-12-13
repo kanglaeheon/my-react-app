@@ -47,8 +47,11 @@ export const TodoDeleteBtn = styled.button`
   color: #434343;
 `;
 
+const handleTodoCheckboxClick = (id, done, renderTodos) => {};
+
 export const Todo = ({ todo }) => {
   const { id, content, done, date } = todo;
+
   return (
     <TodoContainer>
       <TodoCheckbox type="checkbox" checked={done}></TodoCheckbox>
