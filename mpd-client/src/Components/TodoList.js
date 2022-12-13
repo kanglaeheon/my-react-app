@@ -47,6 +47,7 @@ export const TodoList = ({ handleCreateBtnClick, isCreateMode }) => {
         <CreateTodo
           handleCreateBtnClick={handleCreateBtnClick}
           isCreateMode={isCreateMode}
+          renderTodos={renderTodos}
         />
       </TodoListContents>
     </TodoListContainer>

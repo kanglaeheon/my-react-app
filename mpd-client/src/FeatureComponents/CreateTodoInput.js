@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
+import axios from "axios";
 
 export const TodoCreateInputContainer = styled.div`
   width: 100%;
@@ -37,12 +38,36 @@ export const TodoCreateInputSubmitBtn = styled.button`
   background-color: moccasin;
 `;
 
-export const CreateTodoInput = ({ handleCreateBtnClick }) => {
+export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
   const [inputText, setInputText] = useState("");
   const inputTextElement = useRef(null);
 
   const handleCreateInputChange = (e) => {
     setInputText(e.target.value);
+  };
+
+  const handleCreateInputSubmit = () => {
+    const newDate = new Date();
+    const today = `${newDate.getFullYear()}. ${
+      newDate.getMonth() + 1
+    }. ${newDate.getDate()}`;
+    axios({
+      method: "post",
+      url: "http://localhost:3001/todos",
+      data: {
+        content: inputText,
+        done: false,
+        date: today,
+      },
+    })
+      .then(() => {
+        inputTextElement.current.value = "";
+        handleCreateBtnClick();
+        renderTodos();
+      })
+      .catch((err) => {
+        console.error("ERROR: ", err);
+      });
   };
 
   return (
@@ -58,7 +83,7 @@ export const CreateTodoInput = ({ handleCreateBtnClick }) => {
           handleCreateInputChange(e);
         }}
       />
-      <TodoCreateInputSubmitBtn handleCreateBtnClick={handleCreateBtnClick}>
+      <TodoCreateInputSubmitBtn onClick={handleCreateInputSubmit}>
         +
       </TodoCreateInputSubmitBtn>
     </TodoCreateInputContainer>

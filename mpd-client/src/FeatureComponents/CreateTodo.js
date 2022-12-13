@@ -15,11 +15,18 @@ export const TodoCreateBtn = styled.button`
   color: white;
 `;
 
-export const CreateTodo = ({ handleCreateBtnClick, isCreateMode }) => {
+export const CreateTodo = ({
+  handleCreateBtnClick,
+  isCreateMode,
+  renderTodos,
+}) => {
   return (
     <TodoCreateContainer>
       {isCreateMode && (
-        <CreateTodoInput handleCreateBtnClick={handleCreateBtnClick} />
+        <CreateTodoInput
+          handleCreateBtnClick={handleCreateBtnClick}
+          renderTodos={renderTodos}
+        />
       )}
       <TodoCreateBtn onClick={handleCreateBtnClick}>
         할 일 추가하기
