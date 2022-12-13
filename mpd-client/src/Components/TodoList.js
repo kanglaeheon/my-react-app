@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { dummyData } from "../static/dummyData";
+import { Todo } from "./Todo";
 
 export const TodoListContainer = styled.div`
   width: 100%;
@@ -12,7 +13,7 @@ export const TodoListContainer = styled.div`
 
 export const TodoListContents = styled.div`
   width: 500px;
-  height: 750px;
+  height: 550px;
   border: 2px solid royalblue;
   background-color: white;
 
@@ -23,7 +24,6 @@ export const TodoListContents = styled.div`
 `;
 
 export const TodoList = () => {
-  console.log(dummyData);
   const data = dummyData;
   const [todos, setTodos] = useState(data);
 
@@ -31,11 +31,9 @@ export const TodoList = () => {
     <TodoListContainer>
       <TodoListContents>
         {todos.map((todo) => {
-          return <p>{todo.content}</p>;
+          return <Todo todo={todo} key={todo.id} />;
         })}
       </TodoListContents>
-
-      {/* <TodoListContents>체크박스 / TODO / 날짜 / 수정 / 삭제</TodoListContents> */}
       <p>추가 버튼</p>
     </TodoListContainer>
   );

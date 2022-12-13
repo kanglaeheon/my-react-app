@@ -7,13 +7,13 @@ const dummyData = [
   },
   {
     id: 2,
-    text: "밥 먹기",
+    content: "밥 먹기",
     done: false,
     date: "2022. 12. 13",
   },
   {
     id: 3,
-    text: "숙제하기",
+    content: "숙제하기",
     done: true,
     date: "2022. 12. 13",
   },
