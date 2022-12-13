@@ -39,11 +39,11 @@ export const TodoCreateInputSubmitBtn = styled.button`
 `;
 
 export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
-  const [inputText, setInputText] = useState("");
-  const inputTextElement = useRef(null);
+  const [textCreateInput, setTextCreateInput] = useState("");
+  const elementCreateInput = useRef(null);
 
   const handleCreateInputChange = (e) => {
-    setInputText(e.target.value);
+    setTextCreateInput(e.target.value);
   };
 
   const handleCreateInputSubmit = () => {
@@ -55,13 +55,13 @@ export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
       method: "post",
       url: "http://localhost:3001/todos",
       data: {
-        content: inputText,
+        content: textCreateInput,
         done: false,
         date: today,
       },
     })
       .then(() => {
-        inputTextElement.current.value = "";
+        elementCreateInput.current.value = "";
         handleCreateBtnClick();
         renderTodos();
       })
@@ -84,7 +84,7 @@ export const CreateTodoInput = ({ handleCreateBtnClick, renderTodos }) => {
         id="todo_input"
         placeholder="할 일을 입력하세요."
         maxLength={20}
-        ref={inputTextElement}
+        ref={elementCreateInput}
         onChange={(e) => {
           handleCreateInputChange(e);
         }}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
+import { useState } from "react";
 
 export const TodoContainer = styled.div`
   width: 450px;
@@ -72,6 +73,8 @@ const handleTodoCheckboxClick = (id, done, renderTodos) => {
     .catch((err) => console.error("ERROR: ", err));
 };
 
+// const handleTodoUpdateBtnClick = id;
+
 const handleTodoDeleteBtnClick = (id, renderTodos) => {
   axios
     .delete(`http://localhost:3001/todos/${id}`)
@@ -84,6 +87,11 @@ const handleTodoDeleteBtnClick = (id, renderTodos) => {
 };
 
 export const Todo = ({ todo, renderTodos }) => {
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [inputText, setInputText] = useState("");
+
+  //   const handle
+
   const { id, content, done, date } = todo;
 
   return (
