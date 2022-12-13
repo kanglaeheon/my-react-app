@@ -50,6 +50,21 @@ export const TodoUpdateBtn = styled.button`
   color: #434343;
 `;
 
+export const TodoUpdateInput = styled.input`
+  width: 100%;
+  background-color: white;
+  color: #434343;
+`;
+
+export const TodoUpdateSubmit = styled.button`
+  background-color: white;
+  border-radius: 10px;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ffd177;
+  color: #434343;
+`;
+
 export const TodoDeleteBtn = styled.button`
   background-color: white;
   border-radius: 10px;
@@ -59,7 +74,13 @@ export const TodoDeleteBtn = styled.button`
   color: #434343;
 `;
 
-const handleTodoCheckboxClick = (id, done, renderTodos) => {
+const handleTodoCheckboxClick = (
+  id,
+  done,
+  isUpdateMode,
+  setIsUpdateMode,
+  renderTodos
+) => {
   axios({
     method: "patch",
     url: `http://localhost:3001/todos/${id}`,
@@ -68,12 +89,32 @@ const handleTodoCheckboxClick = (id, done, renderTodos) => {
     },
   })
     .then(() => {
+      setIsUpdateMode(!isUpdateMode);
       renderTodos();
     })
     .catch((err) => console.error("ERROR: ", err));
 };
 
-// const handleTodoUpdateBtnClick = id;
+const handleUpdateSubmitBtnClick = (
+  id,
+  content,
+  isUpdateMode,
+  setIsUpdateMode,
+  renderTodos
+) => {
+  axios({
+    method: "patch",
+    url: `http://localhost:3001/todos/${id}`,
+    data: {
+      content: content,
+    },
+  })
+    .then(() => {
+      setIsUpdateMode(!isUpdateMode);
+      renderTodos();
+    })
+    .catch((err) => console.error("ERROR: ", err));
+};
 
 const handleTodoDeleteBtnClick = (id, renderTodos) => {
   axios
@@ -87,12 +128,29 @@ const handleTodoDeleteBtnClick = (id, renderTodos) => {
 };
 
 export const Todo = ({ todo, renderTodos }) => {
-  const [isUpdateMode, setIsUpdateMode] = useState(false);
-  const [inputText, setInputText] = useState("");
-
-  //   const handle
-
   const { id, content, done, date } = todo;
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [textUpdateInput, setTextUpdateInput] = useState(content);
+
+  const handleTextUpdateInputChange = (e) => {
+    setTextUpdateInput(e.target.value);
+  };
+
+  const handleOnKeyPressUpdateForm = (e) => {
+    if (e.key === "Enter") {
+      handleUpdateSubmitBtnClick(
+        id,
+        content,
+        isUpdateMode,
+        setIsUpdateMode,
+        renderTodos
+      );
+    }
+  };
+
+  const handleTodoUpdateBtnClick = () => {
+    setIsUpdateMode(!isUpdateMode);
+  };
 
   return (
     <TodoContainer>
@@ -103,9 +161,39 @@ export const Todo = ({ todo, renderTodos }) => {
           handleTodoCheckboxClick(id, done, renderTodos);
         }}
       ></TodoCheckbox>
-      <TodoContent className={`${done ? "done" : ""}`}>{content}</TodoContent>
-      <TodoDate className={`${done ? "done" : ""}`}>{date}</TodoDate>
-      <TodoUpdateBtn>U</TodoUpdateBtn>
+      {isUpdateMode ? (
+        <>
+          <TodoUpdateInput
+            type="text"
+            value={textUpdateInput}
+            onChange={(e) => {
+              handleTextUpdateInputChange(e);
+            }}
+            onKeyUp={(e) => {
+              handleOnKeyPressUpdateForm(e);
+            }}
+          />
+          <TodoUpdateSubmit
+            onClick={() => {
+              handleUpdateSubmitBtnClick(
+                id,
+                textUpdateInput,
+                isUpdateMode,
+                setIsUpdateMode,
+                renderTodos
+              );
+            }}
+          >
+            V
+          </TodoUpdateSubmit>
+        </>
+      ) : (
+        <TodoContent className={`${done ? "done" : ""}`}>{content}</TodoContent>
+      )}
+      {!isUpdateMode && (
+        <TodoDate className={`${done ? "done" : ""}`}>{date}</TodoDate>
+      )}
+      <TodoUpdateBtn onClick={handleTodoUpdateBtnClick}>U</TodoUpdateBtn>
       <TodoDeleteBtn onClick={() => handleTodoDeleteBtnClick(id, renderTodos)}>
         D
       </TodoDeleteBtn>
