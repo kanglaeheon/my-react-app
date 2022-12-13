@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import { CreateTodoInput } from "./CreateTodoInput";
 
-export const TodoUpdateBtn = styled.button`
+export const TodoCreateContainer = styled.div``;
+
+export const TodoCreateInput = styled.div``;
+
+export const TodoCreateBtn = styled.button`
   width: 450px;
   height: 40px;
   background-color: #434343;
@@ -10,10 +15,15 @@ export const TodoUpdateBtn = styled.button`
   color: white;
 `;
 
-export const CreateTodo = () => {
+export const CreateTodo = ({ handleCreateBtnClick, isCreateMode }) => {
   return (
-    <>
-      <TodoUpdateBtn>할 일 추가하기</TodoUpdateBtn>
-    </>
+    <TodoCreateContainer>
+      {isCreateMode && (
+        <CreateTodoInput handleCreateBtnClick={handleCreateBtnClick} />
+      )}
+      <TodoCreateBtn onClick={handleCreateBtnClick}>
+        할 일 추가하기
+      </TodoCreateBtn>
+    </TodoCreateContainer>
   );
 };

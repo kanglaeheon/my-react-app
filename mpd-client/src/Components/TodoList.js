@@ -25,7 +25,7 @@ export const TodoListContents = styled.div`
   padding: 10px 0;
 `;
 
-export const TodoList = () => {
+export const TodoList = ({ handleCreateBtnClick, isCreateMode }) => {
   const [todos, setTodos] = useState([]);
 
   const renderTodos = () => {
@@ -44,7 +44,10 @@ export const TodoList = () => {
         {todos.map((todo) => {
           return <Todo todo={todo} key={todo.id} />;
         })}
-        <CreateTodo />
+        <CreateTodo
+          handleCreateBtnClick={handleCreateBtnClick}
+          isCreateMode={isCreateMode}
+        />
       </TodoListContents>
     </TodoListContainer>
   );
