@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { dummyData } from "../static/dummyData";
 
 export const TodoListContainer = styled.div`
   width: 100%;
@@ -21,9 +23,19 @@ export const TodoListContents = styled.div`
 `;
 
 export const TodoList = () => {
+  console.log(dummyData);
+  const data = dummyData;
+  const [todos, setTodos] = useState(data);
+
   return (
     <TodoListContainer>
-      <TodoListContents>체크박스 / TODO / 날짜 / 수정 / 삭제</TodoListContents>
+      <TodoListContents>
+        {todos.map((todo) => {
+          return <p>{todo.content}</p>;
+        })}
+      </TodoListContents>
+
+      {/* <TodoListContents>체크박스 / TODO / 날짜 / 수정 / 삭제</TodoListContents> */}
       <p>추가 버튼</p>
     </TodoListContainer>
   );
