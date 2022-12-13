@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { dummyData } from "../static/dummyData";
 import { Todo } from "./Todo";
+import { CreateTodo } from "../FeatureComponents/CreateTodo";
 
 export const TodoListContainer = styled.div`
   width: 100%;
@@ -33,8 +34,8 @@ export const TodoList = () => {
         {todos.map((todo) => {
           return <Todo todo={todo} key={todo.id} />;
         })}
+        <CreateTodo />
       </TodoListContents>
-      <p>추가 버튼</p>
     </TodoListContainer>
   );
 };
