@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { dummyData } from "../static/dummyData";
+import axios from "axios";
+
 import { Todo } from "./Todo";
 import { CreateTodo } from "../FeatureComponents/CreateTodo";
 
@@ -25,8 +26,17 @@ export const TodoListContents = styled.div`
 `;
 
 export const TodoList = () => {
-  const data = dummyData;
-  const [todos, setTodos] = useState(data);
+  const [todos, setTodos] = useState([]);
+
+  const renderTodos = () => {
+    axios.get("http://localhost:3001/todos").then((res) => {
+      setTodos(res.data);
+    });
+  };
+
+  useEffect(() => {
+    renderTodos();
+  }, []);
 
   return (
     <TodoListContainer>
